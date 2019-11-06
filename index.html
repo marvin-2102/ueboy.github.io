@@ -3,12 +3,26 @@
      <meta charset = "UTF-8">
       <script src="https://github.com/processing/p5.js/releases/download/0.5.16/p5.js"></script> 
          <script>
-  function preload() {
-  image('backgroundgame.jpeg');
+ function setup() {
+  createCanvas(1280, 720);  
+  frameRate(15);
+}
+
+function preload() {
+  img = loadImage('backgroundname.jpeg');
+  for(i = 0; i < 20; i++) {
+    prot[i] = loadImage('protagonista/Andando/Andando("+i+").jpeg');
+  }
+}
+
+function draw() {
+  image(img[ prot ], 0, 0);
+  cont++;
+  if(cont >= 20) {
+    cont = 0;
   }
   
-  function draw() {
-  image(img, 0, 0);
+}
     </script>
     <style> </style>
   </head>
