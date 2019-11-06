@@ -5,9 +5,7 @@
   <script>
   
   function preload() {
-  image('gamename.png');
-  image('Slime.tar.gz');
-  
+  image('backgroundgame.jpeg');
   }
   
  
