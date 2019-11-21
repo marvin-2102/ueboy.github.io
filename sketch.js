@@ -1,4 +1,4 @@
-<script>
+
 var heroR = [],heroL = [], heroU = [];
 
 var moveR = false, moveU = false, moveL = false, cont = 0;
@@ -118,4 +118,4 @@ function keyPressed() {
   }
   
 }
-</script>
+
