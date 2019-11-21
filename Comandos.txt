@@ -1,0 +1,38 @@
+a cada (Um numero aleatorio (1-4 segundos)) a doença ativa (1 vez) a animação de ''cuspe'' e libera a gosma em direção ao jogador (Sempre mirando no jogador)
+
+O jogador Ataca a ''Bisturi'' Na tecla "J" -> Se o jogador estiver virado para direita e for atacar (O bisturi será lançado para a direita (Direção pra qual ele está virado) (O mesmo para a ESQUERDA)
+
+O jogador anda nas setas -> Animação de movimento em loop pra direção pra qual ele está virado
+
+O jogador pula no ''Espaço" -> O pulo ativa na direção respectiva a que ele está olhando (Direita ou esquerda)
+
+Se o jogador tomar dano (Colisão da gosma ao jogador) -> Ele ativa a animação de ter tomado dano na respectiva direção a qual ele está virado (Direita ou esquerda)
+
+Se o "bisturi" TOCAR a Doença -> doença a tiva animação de tomar dano (1 vez) e perde vida (5-10 de vida perdida)
+
+Se a ''Gosma'' TOCAR o jogador -> Jogador ativa animação de tomar dano (1 vez) e perde (5-10 de vida) (Animação ativa na direção pra qual o jogador está virado (Esquerda ou direita)
+
+O bisturi ao ser lançado pelo jogador na tecla "J" percorre o mapa na velocidade 100 (eixoX por segundo) (Sempre na direção em que o jogador está mirado (Esquerda ou direita)
+A gosma ao ser lançada pela doença percorre o mapa na velocidade 100 (eixoX por segundo) (Sempre na direção do jogador)
+
+O jogador vai aumentando a velocidade de movimento com base na continuação da tecla de andar apertada (No caso, se segurar a seta pra frente o JOGADOR começa a se mover na velocidade 50 e vai aumentando a cada 0,25s até chegar em 100 (Velocidade maxima))
+
+A Doença sempre vai ficar parada no mesmo lugar, porém, sempre virada na direção do jogador
+
+Quando o jogador pular a animação de pulo é ativada  (1 Vez) e demora 1 segundo para o jogador atingir o solo novamente
+
+Enquanto o jogador estiver no ar (com a animação de pulo ativada) ele pode se mover, porém numa velocidade reduzida (35-50 eixoX por segundo)
+
+A Gosma da doença ao atingir o Bisturi, eles se anulam (No caso, a animação tando da gosma como do bisturi quebram ("break;"))
+
+A Doença lança a gosma num eixoY aleatorio 
+----(eixoY minimo em que a gosma pode ser jogada pela doença = eixoY onde está o "Pé do jogador" (Parte mais baixa em que o jogador pode ficar))
+----(eixoY máximo em que a gosma pode ser jogada pela doença = eixoY mais alto em que o jogador pode chegar pulando)
+
+Quando o jogador está parado a animação ativa é a dele de frente (Respirando)
+
+
+A vida da doença = 100
+A vida do jogador = 100
+
+*TODOS OS VALORES PODEM SER ALTERADOS CASO: NÃO FIQUE FLUIDO, DEVAGAR OU RAPIDO DEMAIS*
