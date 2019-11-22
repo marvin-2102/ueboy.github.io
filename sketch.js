@@ -27,9 +27,9 @@ function setup() {
 }
 
 function preload() {
-  background = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/backgroundgame.jpeg');
-  hero = loadImage('https://raw.githubusercontent.com/ZirGG/ueboy.github.io/master/Fudje%20duyxce%202.gif');
-  heroPlay = loadImage('https://raw.githubusercontent.com/ZirGG/ueboy.github.io/master/Jogando%20o%20bisturi%20invertido.gif')
+  background = loadImage('backgroundgame.jpeg'); //Fundo do game
+  hero = loadImage('Hero.gif');
+  heroPlay = loadImage('GIFS/Jogando o bisturi invertido.gif')
   for(i = 0; i < 1  ; i++) {
   heroR[i] = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif');
   heroL[i] = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif')
