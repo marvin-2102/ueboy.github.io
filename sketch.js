@@ -1,4 +1,9 @@
 
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <script>
+    
 var heroR = [],heroL = [], heroU = [];
 
 var moveR = false, moveU = false, moveL = false, cont = 0;
@@ -119,3 +124,6 @@ function keyPressed() {
   
 }
 
+    </script>
+  </head>
+</html>
