@@ -11,7 +11,7 @@ var x = 475
 var y = 95
 
 var heroR = [],heroL = [], heroU = [];
-var moveR = false, moveU = false, moveL = false, cont = 0;
+var heroR = false, heroU = false, heroL = false, cont = 0;
 var xSpace;
 var playWeaponState = false;
 var heroS = true;
@@ -35,14 +35,14 @@ function setup() {
 function preload() {
   fundodafase = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/backgroundgame.jpeg'); //Fundo do game
   hero = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif'); //personagem parado
-  /*heroPlay = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif') //personagem atacando
+  heroPlay = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif') //personagem atacando
   for(i = 0; i < 1  ; i++) {
-  heroR[i] = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif');
-  heroL[i] = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif')
-  */heroU = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');     
-  /*heroL = loadImage('https://raw.githubusercontent.com/ZirGG/ueboy.github.io/master/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif');
-}/
-  monster = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/Monstro.gif');
+  heroR = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif');
+  heroL = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif')
+  heroU = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');     
+  heroL = loadImage('https://raw.githubusercontent.com/ZirGG/ueboy.github.io/master/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif');
+}
+  /*monster = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/Monstro.gif');
   globFrente = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/normal_gobulo_frente.png') ;
   globLado = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/normal_globulo_lado.png');
   arma = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/arma.gif');
@@ -141,32 +141,32 @@ function quit() {
 
 function keyPressed(){
   
-  if(tela_ativa == 1)
-      if(keyCode === RIGHT_ARROW && (! moveR)) {
-    moveR = true;
+  if(tela_ativa == 1){
+      if(keyCode === RIGHT_ARROW && (! heroR)) {
+    heroR = true;
     heroS = false;
-    moveU = false;
-    moveL = false;
+    heroU = false;
+    heroL = false;
   }
-  if(keyCode === UP_ARROW && (! moveU)) {
-    moveU = true;
+  if(keyCode === UP_ARROW && (! heroU)) {
+    heroU = true;
     heroS = false;
-    moveR = false;
-    moveL = false;
+    heroR = false;
+    heroL = false;
   }
-  if(keyCode === LEFT_ARROW && (! moveL)) {
-    moveR = false;
-    moveU = false;
+  if(keyCode === LEFT_ARROW && (! heroL)) {
+    heroR = false;
+    heroU = false;
     heroS = false;
-    moveL = true;
+    heroL = true;
   }
   if(keyCode === 32 && (! playWeaponState)) {
     playWeaponState = true;
-    moveR = false;
-    moveU = false;
+    heroR = false;
+    heroU = false;
     heroS = false;
-    moveL = false;
-  }
+    heroL = false;
+  }}
   
 
   
@@ -222,7 +222,6 @@ function keyPressed(){
 }
 
 //////////////////////////////////////////////////////////////////////////////
-//jogo code
 function jogar() {
 
   image(fundodafase, 0, 0, 2560, 720);  
@@ -230,13 +229,13 @@ function jogar() {
   if(heroS) {
   image(hero, 0, 320, 400, 400);
   }
-  if(moveR) { 
+  if(heroR) { 
     image(heroR[ cont ],Xo + xWalk, Yo);
     xSpace = Xo + xWalk;
     cont++;
     xWalk += 3;  
   } 
-  if(moveL) {
+  if(heroL) {
     image(heroL[ cont ],xSpace - xWalk, Yo);
     cont++;
     xWalk += 3;
@@ -245,7 +244,7 @@ function jogar() {
     image(heroPlay,Xo + xWalk, Yo);
     xWalk += 3;
   }
-  if(moveU) {
+  if(heroU) {
     image(heroU[ cont ], Xo, Yo - yJump);
     cont++;
     yJump += 2;
@@ -266,7 +265,7 @@ function jogar() {
   main();*/
   
 }
-
+    
     </script>
     <style> body {padding: 0; margin: 0;} </style>
   </head>
