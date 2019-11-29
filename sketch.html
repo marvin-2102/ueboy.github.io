@@ -4,22 +4,27 @@
   <script src="https://github.com/processing/p5.js/releases/download/0.5.16/p5.js"></script> 
   <script>
 
-let iniciar, regras, creditos, sair;
 var tela_ativa = 0
 var opcao = 1
 var x = 475
 var y = 95
 
+var heroSGif = []
+
 var heroDireita = [],heroEsquerda = [], heroPulandoDireita = [];
 var heroDireita = false, heroPulandoDireita = false, heroEsquerda = false, cont = 0;
 var xSpace;
-var playWeaponState = false;
+
+var playWeaponState
+var playWeaponStateOff = false
+var playWeaponStateOn = true
 var heroS = true;
+
 var Xo = 0;
 var Yo = 160;
+
 var xWalk = 0;
 var yJump = 20;
-var gravidade = 1.5;
 //tela ativa 0 = menu
 //tela ativa 1 = jogar
 //tela ativa 2 = regras
@@ -57,7 +62,7 @@ function draw() {
 }
 
 function menu() {
-  background('Black');
+  background(fundodafase);
   fill('white');
   stroke('black');
   strokeWeight(4);
@@ -74,15 +79,18 @@ function menu() {
   text('Regras', 560, 260);
   text('Creditos', 545, 360);
   text('Sair', 590, 460);
+  
+  
 
   noFill();
   stroke(266,0,0);
+  stroke('')
   strokeWeight(4);
   rect(x,y,330,100);
 }
 
 function rules() {
-  background('black')
+  background(fundodafase)
 
   fill('white');
   stroke('black');
@@ -97,7 +105,7 @@ function rules() {
 
 function credits() {
 
-  background('black');
+  background(fundodafase);
 
   fill('white');
   stroke('black');
@@ -110,7 +118,7 @@ function credits() {
 }
 
 function quit() {
-  background('black');
+  background(fundodafase);
 
   fill('white');
   stroke('black');
@@ -126,7 +134,9 @@ function quit() {
   function preload() {
   fundodafase = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/backgroundgame.jpeg'); //Fundo do game
   heroS = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif'); //personagem parado
-  heroSGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif
+    for(i = 0; i < 1; i++) {
+  heroSGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');
+    }
   heroAtack = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif') //personagem atacando
     heroAtackGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif')
   for(i = 0; i < 1  ; i++) {
@@ -175,10 +185,12 @@ function keyPressed(){
     heroEsquerda = false;
   }}
   
-    if(tela_ativa == 0){
-  if(tela_ativa == 1 || tela_ativa == 2 || tela_ativa == 3 || tela_ativa == 4)
-    tela_ativa = 0;
+  if(tela_ativa == 2,3,4){
+    if(keyCode == BACKSPACE)
+    tela_ativa = 0
+  }
   
+    if(tela_ativa == 0){
   if (keyCode === ENTER)
     tela_ativa = opcao;
   
@@ -234,15 +246,15 @@ function jogar() {
  
   image(fundodafase, 0, 0, 2560, 720);  
   
-  
-  heroSGif.position(0, 719);
-  
+  image(heroS, 0,419, 300, 300)
+
   
   if(heroDireita) { 
-    image(heroDireita [cont],Xo + xWalk, Yo);
+    image(heroDireita [ cont ],Xo + xWalk, Yo);
     xSpace = Xo + xWalk;
     cont++;
     xWalk += 3;  
+    
   } 
   if(heroEsquerda) {
     image(heroEsquerda[ cont ],xSpace - xWalk, Yo);
