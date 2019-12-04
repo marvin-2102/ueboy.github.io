@@ -4,25 +4,20 @@
   <script src="https://github.com/processing/p5.js/releases/download/0.5.16/p5.js"></script> 
   <script>
 
-var tela_ativa = 0
+ var tela_ativa = 0
 var opcao = 1
 var x = 475
 var y = 95
-
 var heroSGif = []
-
-var heroDireita = [],heroEsquerda = [], heroPulandoDireita = [];
-var heroDireita = false, heroPulandoDireita = false, heroEsquerda = false, cont = 0;
-var xSpace;
-
+var goRight = false, goLeft = false, goJumpR =  false, heroStop = true;
+var heroDireitaGif =[], heroPulandoDireita = [], heroEsquerda = [], cont = 0;
+var xSpace, heroSGif = true;
 var playWeaponState
 var playWeaponStateOff = false
 var playWeaponStateOn = true
 var heroS = true;
-
 var Xo = 0;
 var Yo = 160;
-
 var xWalk = 0;
 var yJump = 20;
 //tela ativa 0 = menu
@@ -32,14 +27,10 @@ var yJump = 20;
 //tela ativa 4 = sair
 //Variáveis para serem usados no menu
 let value = 0;
-
-
 function setup() {
   createCanvas(1280, 720);
   background('black');
 }
-
-
 function draw() {
   switch (tela_ativa) {
     case 0:
@@ -58,95 +49,69 @@ function draw() {
       quit();
       break;
   }
-
 }
-
 function menu() {
   background(fundodafase);
-  fill('white');
-  stroke('black');
+  fill('red');
+  stroke('purple');
   strokeWeight(4);
   rect(480, 0, 1, 1, 50);
   rect(480, 100, 320, 90, 50);
   rect(480, 200, 320, 90, 50);
   rect(480, 300, 320, 90, 50);
   rect(480, 400, 320, 90, 50);
-
   textSize(48);
-  fill('black');
-
+  fill('green');
   text('Jogar', 580, 160);
   text('Regras', 560, 260);
   text('Creditos', 545, 360);
   text('Sair', 590, 460);
   
   
-
   noFill();
   stroke(266,0,0);
   stroke('')
   strokeWeight(4);
   rect(x,y,330,100);
 }
-
 function rules() {
   background(fundodafase)
-
   fill('white');
   stroke('black');
   strokeWeight(1);
-
   textSize(28);
   fill('white')
   
   text('Use as setas do teclado para selecionar as opções e andar no game.', 40, 55);
 }
-
-
 function credits() {
-
   background(fundodafase);
-
   fill('white');
   stroke('black');
   strokeWeight(1);
-
   textSize(28);
   fill('white')
-
   text('The Last disease, é um jogo Feito para o trabalho final da disciplina de Lógica de Programação \n (LOP) do ano 2019.2 pelos alunos: Marcus Vinicius, Victor Alves e Ellen Dantas.', 40, 55);
 }
-
 function quit() {
   background(fundodafase);
-
   fill('white');
   stroke('black');
   strokeWeight(1);
-
   textSize(28);
   fill('white');
-
   text('saindo', 40, 55);
   window.close();
 }
-
   function preload() {
   fundodafase = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/backgroundgame.jpeg'); //Fundo do game
-  heroS = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif'); //personagem parado
-    for(i = 0; i < 1; i++) {
-  heroSGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');
+    for(i = 0 ; i < 20; i++) {
+    heroSGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');
+    heroAtackGif[i] = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif');
+    heroDireitaGif[i] =createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif');
+    heroEsquerdaGif[i] = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif');
+    heroPulandoDireitaGif[i] = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');
     }
-  heroAtack = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif') //personagem atacando
-    heroAtackGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif')
-  for(i = 0; i < 1  ; i++) {
-  heroDireita = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif');
-    heroDireitaGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif');
-  heroEsquerda = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif')
-    heroEsquerdaGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif')
-  heroPulandoDireita = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');     
-    heroPulandoDireitaGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');
-}
   /*monster = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/Monstro.gif');
   globFrente = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/normal_gobulo_frente.png') ;
   globLado = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/normal_globulo_lado.png');
@@ -154,24 +119,22 @@ function quit() {
   raio = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/raio.gif');
   */
   }
-
-
 function keyPressed(){
   
   if(tela_ativa == 1){
-      if(keyCode == RIGHT_ARROW) {
-    heroDireitaGif = true;
-    heroSGif = false;
-    heroPulandoDireitaGif = false;
-    heroEsquerdaGif = false;
+    if(keyCode == RIGHT_ARROW) {
+    goRight = true;
+    heroStop = false;
+    goJumpR = false;
+    goLeft = false;
   }
   if(keyCode == UP_ARROW && (! heroPulandoDireita) && (! heroDireita)) {
-    heroDireita = false;
-    heroS = false;
-    heroPulandoDireita = true;
-    heroEsquerda = false;
+    goRight = false;
+    heroStop = false;
+    heroJumpR= true;
+    goLeft = false;
   }
-  if(keyCode == LEFT_ARROW && (! heroEsquerda)) {
+  /*if(keyCode == LEFT_ARROW && (! heroEsquerda)) {
     heroDireita = false;
     heroS = false;
     heroPulandoDireita = false;
@@ -183,7 +146,7 @@ function keyPressed(){
     heroS = false;
     heroPulandoDireita = false;
     heroEsquerda = false;
-  }}
+  }*/}
   
   if(tela_ativa == 2,3,4){
     if(keyCode == BACKSPACE)
@@ -198,7 +161,6 @@ function keyPressed(){
     tela_ativa = 0
   
   
-
   if(keyCode === DOWN_ARROW){
     if(y<300){
     y+=100;
@@ -240,33 +202,36 @@ function keyPressed(){
   console.log("opcao: "+opcao);
   console.log("Tela ativa: "+tela_ativa);
 }}
-
 //////////////////////////////////////////////////////////////////////////////
 function jogar() {
  
-  image(fundodafase, 0, 0, 2560, 720);  
-  
-  image(heroS, 0,419, 300, 300)
+  image(fundodafase, 0, 0,1280, 720);   
+  if(heroStop) {
+  image(heroSGif, 0, 600, 200, 200)
+  }
+  for(i = 0; i < 4; i++) {
+  if(heroStop) {
+  image(heroSGif[i], 500, 419, 200, 200)
+  }
 
-  
-  if(heroDireita) { 
-    image(heroDireita [ cont ],Xo + xWalk, Yo);
+  if(goRight) { 
+    image(heroDireitaGif[i] ,Xo + xWalk, Yo);
     xSpace = Xo + xWalk;
     cont++;
     xWalk += 3;  
     
   } 
-  if(heroEsquerda) {
-    image(heroEsquerda[ cont ],xSpace - xWalk, Yo);
+  if(goLeft) {
+    image(heroEsquerdaGif[i],xSpace - xWalk, Yo);
     cont++;
     xWalk += 3;
   }
- if(playWeaponState) {
+ if(playWeaponStateGif) {
     image(heroAtack,Xo + xWalk, Yo);
     xWalk += 3;
   }
-  if(heroPulandoDireita) {
-    image(heroPulandoDireita[ cont ], Xo, Yo - yJump);
+  if(heroJumpR) {
+    image(heroPulandoDireitaGif[i], Xo, Yo - yJump);
     cont++;
     yJump += 2;
     if(yJump >=150) {
@@ -276,7 +241,7 @@ function jogar() {
   if(cont >= 1) {
     cont = 0;
   }
-  
+  }
   /*image(monster, 300, 85);  
   image(globFrente, 600, 110);
   image(globLado, 600, 80);
