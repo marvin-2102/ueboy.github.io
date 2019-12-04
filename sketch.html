@@ -3,34 +3,90 @@
   <meta charset="UTF-8">
   <script src="https://github.com/processing/p5.js/releases/download/0.5.16/p5.js"></script> 
   <script>
-
- var tela_ativa = 0
+let iniciar, regras, creditos, sair
+var tela_ativa = 0
 var opcao = 1
 var x = 475
 var y = 95
-var heroSGif = []
-var goRight = false, goLeft = false, goJumpR =  false, heroStop = true;
-var heroDireitaGif =[], heroPulandoDireita = [], heroEsquerda = [], cont = 0;
-var xSpace, heroSGif = true;
-var playWeaponState
-var playWeaponStateOff = false
-var playWeaponStateOn = true
-var heroS = true;
-var Xo = 0;
-var Yo = 160;
-var xWalk = 0;
-var yJump = 20;
 //tela ativa 0 = menu
 //tela ativa 1 = jogar
 //tela ativa 2 = regras
 //tela ativa 3 = creditos
 //tela ativa 4 = sair
-//Variáveis para serem usados no menu
+//tela ativa 5 = tela de carregamento 1
 let value = 0;
+
+ 
+//VARIAVEIS DO PERSONAGEM
+var heroSGIF = {
+  x:519,
+  y:1,
+  width:200,
+  height:200
+}
+
+ 
+var Texto_carregamento = 'O vírus HIV provoca uma redução na eficiência do sistema imunológico porque ele o ataca. As células de defesa mais atingidas são os linfócitos T-CD4+.  Um paciente só é considerado como portador de AIDS quando o vírus HIV tiver atacado e destruído uma quantidade tão grande de linfócitos, que o sistema imunológico já encontra-se debilitado. Vamos ajudar a nossa paciente com o tratamento da HIV e evitar com que ela adquira AIDS. Para isso não podemos permitir que seus linfócitos CD4 fique menor que 200 células/mm3'
+
+
+ 
+function preload(){  
+  
+  //CARREGAR FUNDO DO GAME
+ fundodafase = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/backgroundgame.jpeg');
+    
+  //CARREGAR PERSONAGENS
+  heroSGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');//JOGADOR PARADO
+  
+  heroDireitaGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif.gif');//ANDANDO PRA DIREITA
+  
+    heroEsquerdaGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif.gif');//ANDANDO PRA ESQUERDA
+  
+  heroAtackRGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif');//ATACANDO PRA DIREITA
+  
+  heroAtackLGIF = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20jogando%20o%20bisturi.gif');//ATACANDO PRA ESQUERDA
+  
+heroPulandoRGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');//PULANDO PRA DIREITA
+  
+  heroPulandoLGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando.gif');//PULANDO PRA ESQUERDA
+  
+  heroDanoRGIF = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20DIREITA.gif');//JOGADOR TOMANDO DANO DIREITA
+  
+  heroDanoLGIF = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20ESQUERDA.gif');//JOGADOR TOMANDO DANO ESQUERDA
+  
+  
+    //CREATE IMG//
+  
+  
+  //CRIAÇÃO DE IMAGEM
+  heroSGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');//JOGADOR PARADO
+  
+    heroAtackRGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif');//ATACANDO PRA DIREITA
+  
+    heroAtackLGIF = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20jogando%20o%20bisturi.gif');//ATACANDO PRA ESQUERDA
+  
+    heroDireitaGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif.gif');//ANDANDO PRA DIREITA
+  
+    heroEsquerdaGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif.gif');//ANDANDO PRA ESQUERDA
+  
+    heroPulandoRGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');//PULANDO PRA DIREITA
+  
+    heroPulandoLGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando.gif');//PULANDO PRA ESQUERDA
+  
+  heroDanoRGIF = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20DIREITA.gif');//JOGADOR TOMANDO DANO DIREITA
+    
+  heroDanoLGIF = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20ESQUERDA.gif');//JOGADO  R TOMANDO DANO ESQUERDA
+}
+ 
+
+//TAMANHO DA TELA
 function setup() {
   createCanvas(1280, 720);
   background('black');
 }
+ 
+
+//TELA DE CIMA
 function draw() {
   switch (tela_ativa) {
     case 0:
@@ -48,32 +104,48 @@ function draw() {
     case 4:
       quit();
       break;
+    case 5:
+    carregamento();
+    break;
   }
 }
+ 
+ 
+function carregamento(){
+background(fundodafase)
+  
+    fill('white')
+    text(Texto_carregamento, 40, 55);
+  
+}
+ 
+ 
+//MENU
 function menu() {
   background(fundodafase);
-  fill('red');
-  stroke('purple');
+  fill('white');
+  stroke('white');
   strokeWeight(4);
-  rect(480, 0, 1, 1, 50);
   rect(480, 100, 320, 90, 50);
   rect(480, 200, 320, 90, 50);
   rect(480, 300, 320, 90, 50);
   rect(480, 400, 320, 90, 50);
   textSize(48);
-  fill('green');
+  
+    fill('#00FF00');
   text('Jogar', 580, 160);
   text('Regras', 560, 260);
   text('Creditos', 545, 360);
   text('Sair', 590, 460);
-  
-  
+ 
   noFill();
-  stroke(266,0,0);
-  stroke('')
+  stroke('#00FF00');
   strokeWeight(4);
   rect(x,y,330,100);
 }
+ 
+
+//OPÇÃO REGRAS
 function rules() {
   background(fundodafase)
   fill('white');
@@ -81,9 +153,12 @@ function rules() {
   strokeWeight(1);
   textSize(28);
   fill('white')
-  
   text('Use as setas do teclado para selecionar as opções e andar no game.', 40, 55);
+  
 }
+ 
+
+//OPÇÃO CREDITOS
 function credits() {
   background(fundodafase);
   fill('white');
@@ -93,6 +168,10 @@ function credits() {
   fill('white')
   text('The Last disease, é um jogo Feito para o trabalho final da disciplina de Lógica de Programação \n (LOP) do ano 2019.2 pelos alunos: Marcus Vinicius, Victor Alves e Ellen Dantas.', 40, 55);
 }
+ 
+ 
+ 
+//OPÇÃO SAIR
 function quit() {
   background(fundodafase);
   fill('white');
@@ -103,70 +182,24 @@ function quit() {
   text('saindo', 40, 55);
   window.close();
 }
-  function preload() {
-  fundodafase = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/backgroundgame.jpeg'); //Fundo do game
-    for(i = 0 ; i < 20; i++) {
-    heroSGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');
-    heroAtackGif[i] = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif');
-    heroDireitaGif[i] =createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif');
-    heroEsquerdaGif[i] = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif');
-    heroPulandoDireitaGif[i] = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');
-    }
-  /*monster = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/Monstro.gif');
-  globFrente = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/normal_gobulo_frente.png') ;
-  globLado = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/normal_globulo_lado.png');
-  arma = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/arma.gif');
-  raio = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/raio.gif');
-  */
-  }
+ 
+
+//SELEÇÃO NO MENU
 function keyPressed(){
+console.log(keyCode);
   
-  if(tela_ativa == 1){
-    if(keyCode == RIGHT_ARROW) {
-    goRight = true;
-    heroStop = false;
-    goJumpR = false;
-    goLeft = false;
-  }
-  if(keyCode == UP_ARROW && (! heroPulandoDireita) && (! heroDireita)) {
-    goRight = false;
-    heroStop = false;
-    heroJumpR= true;
-    goLeft = false;
-  }
-  /*if(keyCode == LEFT_ARROW && (! heroEsquerda)) {
-    heroDireita = false;
-    heroS = false;
-    heroPulandoDireita = false;
-    heroEsquerda = true;
-  }
-  if(keyCode == 32 && (! playWeaponState)) {
-    playWeaponState = true;
-    heroDireita = false;
-    heroS = false;
-    heroPulandoDireita = false;
-    heroEsquerda = false;
-  }*/}
+  if(tela_ativa == 2 || tela_ativa == 3)
+    tela_ativa = 0;
   
-  if(tela_ativa == 2,3,4){
-    if(keyCode == BACKSPACE)
-    tela_ativa = 0
-  }
-  
-    if(tela_ativa == 0){
   if (keyCode === ENTER)
     tela_ativa = opcao;
   
   if(keyCode == BACKSPACE)
     tela_ativa = 0
   
-  
   if(keyCode === DOWN_ARROW){
     if(y<300){
     y+=100;
-    if(opcao==0)
-    opcao=1;
-    else
     if(opcao==1)
     opcao=2;
     else
@@ -179,11 +212,8 @@ function keyPressed(){
     
   }else 
     if(keyCode===UP_ARROW){
-    if(y>0){
-      y-=100
-      if(opcao==1){
-      opcao=0
-      } else{
+    if(y>100){
+      y-=100 
       if(opcao==2){
       opcao=1
       } else{
@@ -197,60 +227,18 @@ function keyPressed(){
       }
       }
       }
-      }
-  
   console.log("opcao: "+opcao);
   console.log("Tela ativa: "+tela_ativa);
-}}
-//////////////////////////////////////////////////////////////////////////////
-function jogar() {
- 
-  image(fundodafase, 0, 0,1280, 720);   
-  if(heroStop) {
-  image(heroSGif, 0, 600, 200, 200)
-  }
-  for(i = 0; i < 4; i++) {
-  if(heroStop) {
-  image(heroSGif[i], 500, 419, 200, 200)
-  }
-
-  if(goRight) { 
-    image(heroDireitaGif[i] ,Xo + xWalk, Yo);
-    xSpace = Xo + xWalk;
-    cont++;
-    xWalk += 3;  
-    
-  } 
-  if(goLeft) {
-    image(heroEsquerdaGif[i],xSpace - xWalk, Yo);
-    cont++;
-    xWalk += 3;
-  }
- if(playWeaponStateGif) {
-    image(heroAtack,Xo + xWalk, Yo);
-    xWalk += 3;
-  }
-  if(heroJumpR) {
-    image(heroPulandoDireitaGif[i], Xo, Yo - yJump);
-    cont++;
-    yJump += 2;
-    if(yJump >=150) {
-      yJump = 0;
-    }
-  }
-  if(cont >= 1) {
-    cont = 0;
-  }
-  }
-  /*image(monster, 300, 85);  
-  image(globFrente, 600, 110);
-  image(globLado, 600, 80);
-  image(arma, 700, 75);
-  image(raio, 800, 100);
-  keyPressed();
-  //main();*/
-  
 }
+ 
+
+function jogar (){
+  background(fundodafase);
+ 
+  
+ 
+}
+
     </script>
     <style> body {padding: 0; margin: 0;} </style>
   </head>
