@@ -1,0 +1,55 @@
+
+
+function preload(){
+  
+  //CARREGAR FUNDO DO GAME
+ fundodafase = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/backgroundgame.jpeg');
+    
+  //CARREGAR PERSONAGENS
+  heroSGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');//JOGADOR PARADO
+  
+  heroDireitaGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif.gif');//ANDANDO PRA DIREITA
+  
+    heroEsquerdaGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif.gif');//ANDANDO PRA ESQUERDA
+  
+  heroAtackRGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif');//ATACANDO PRA DIREITA
+  
+  heroAtackLGIF = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20jogando%20o%20bisturi.gif');//ATACANDO PRA ESQUERDA
+  
+heroPulandoRGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');//PULANDO PRA DIREITA
+  
+  heroPulandoLGif = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando.gif');//PULANDO PRA ESQUERDA
+  
+  heroDanoRGIF = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20DIREITA.gif');//JOGADOR TOMANDO DANO DIREITA
+  
+  heroDanoLGIF = loadImage('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20ESQUERDA.gif');//JOGADOR TOMANDO DANO ESQUERDA
+  
+  
+  
+    //CREATE IMG//
+  
+  //CRIAÇÃO DE IMAGEM
+  heroSGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%202.gif');//JOGADOR PARADO
+  
+    heroAtackRGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Jogando%20o%20bisturi%20invertido.gif');//ATACANDO PRA DIREITA
+  
+    heroAtackLGIF = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20jogando%20o%20bisturi.gif');//ATACANDO PRA ESQUERDA
+  
+    heroDireitaGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20direita%20com%20arma.gif.gif');//ANDANDO PRA DIREITA
+  
+    heroEsquerdaGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20andando%20esquerda%20com%20arma.gif.gif');//ANDANDO PRA ESQUERDA
+  
+    heroPulandoRGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando%20direita.gif');//PULANDO PRA DIREITA
+  
+    heroPulandoLGif = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/Fudje%20duyxce%20pulando.gif');//PULANDO PRA ESQUERDA
+  
+  heroDanoRGIF = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20DIREITA.gif');//JOGADOR TOMANDO DANO DIREITA
+    
+  heroDanoLGIF = createImg('https://raw.githubusercontent.com/Ueboy/ueboy.github.io/master/GIFS/pulando%20de%20dor%20ESQUERDA.gif');//JOGADOR TOMANDO DANO ESQUERDA
+
+
+
+
+
+
+}
